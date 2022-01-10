@@ -1,42 +1,152 @@
-import React from 'react'
+import * as React from 'react';
+import { useState } from "react"
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const Signup = () => {
-    return (
-        <div className="row mt-5 mx-5">
-            <form class="row g-3">
-            <div class="col-md-6">
-                <label for="validationDefault01" class="form-label">First name</label>
-                <input type="text" class="form-control" id="validationDefault01" value="Mark" required />
-            </div>
-            <div class="col-md-6">
-                <label for="validationDefault02" class="form-label">Last name</label>
-                <input type="text" class="form-control" id="validationDefault02" value="Otto" required />
-            </div>
-            
-            <div class="col-md-6">
-                <label for="validationDefault03" class="form-label">Email</label>
-                <input type="email" class="form-control" id="validationDefault02" value="Otto" required />
-            </div>
-            <div class="col-md-6">
-                <label for="validationDefault05" class="form-label">Password</label>
-                <input type="password" class="form-control" id="validationDefault05" required /> 
-            </div>
-            <div class="col-12">
-                <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required />
-                <label class="form-check-label" for="invalidCheck2">
-                    Agree to terms and conditions
-                </label>
-                </div>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit">Register</button>
-            </div>
-        </form>
-
-        </div>
-        
-    )
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://www.conclasetechnologies.com.ng">
+        Conclase Technologies
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
 }
 
-export default Signup
+const theme = createTheme();
+
+export default function SignUp() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    // eslint-disable-next-line no-console
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  };
+
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+ 
+  
+  
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="firstName"
+                  value={firstname}
+                  onChange={(e) => setFirstname(e.target.value) }
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  value={lastname}
+                   onChange={(e) => setLastname(e.target.value) }
+                  name="lastName"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value) }
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value) }
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  label="I want to receive inspiration, marketing promotions and updates via email."
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+
+            
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 5 }} />
+      </Container>
+    </ThemeProvider>
+  );
+}
