@@ -29,7 +29,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUp({ firstname, setFirstname, lastname, setLastname, email, setEmail, password, setPassword, handleSignup}) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -40,10 +40,9 @@ export default function SignUp() {
     });
   };
 
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  
+  
+  
 
  
   
@@ -131,6 +130,7 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleSignup}
             >
               Sign Up
             </Button>

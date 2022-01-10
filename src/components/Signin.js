@@ -29,7 +29,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function SignIn({ email, setEmail, password, setPassword, handleSignin}) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -40,8 +40,7 @@ export default function SignIn() {
     });
   };
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  
 
 
   return (
@@ -97,6 +96,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleSignin}
             >
               Sign In
             </Button>
